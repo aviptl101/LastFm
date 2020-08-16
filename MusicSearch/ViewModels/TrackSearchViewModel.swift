@@ -1,5 +1,5 @@
 //
-//  SearchTrackViewModel.swift
+//  TrackSearchViewModel.swift
 //  MusicSearch
 //
 //  Created by Avinash J Patel on 16/08/20.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-final class SearchTrackViewModel {
+final class TrackSearchViewModel {
     
 }

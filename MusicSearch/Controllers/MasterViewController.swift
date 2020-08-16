@@ -8,9 +8,10 @@
 
 import UIKit
 
-class MasterViewController: UIViewController {
+final class MasterViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
-
+    private var trackSearchViewModel: TrackSearchViewModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

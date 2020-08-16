@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class SearchTrackTableViewCell: UITableViewCell {
     @IBOutlet weak var trackImageView: UIImageView!
@@ -17,5 +18,12 @@ class SearchTrackTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         trackImageView.layer.cornerRadius = 3
+    }
+    
+    func setTrackInfo(trackCellModel: TrackSearchCellModel) {
+        trackImageView.sd_setImage(with: trackCellModel.trackImage, placeholderImage: UIImage(systemName: "person.circle"))
+
+        titleLabel.text = trackCellModel.trackTitle
+        artistLabel.text = trackCellModel.artistTitle
     }
 }

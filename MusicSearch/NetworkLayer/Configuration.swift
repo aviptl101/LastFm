@@ -9,13 +9,13 @@
 import Foundation
 
 // API Key Configuration for Lastfm
-public class Configuration {
-    public static let shared = Configuration()
+class Configuration {
+    static let shared = Configuration()
     private init() { }
 
-    public var apiKey: String?
+    var apiKey: String?
 
-    public func configure(apiKey: String) {
+    func configure(apiKey: String) {
         self.apiKey = apiKey
     }
 }

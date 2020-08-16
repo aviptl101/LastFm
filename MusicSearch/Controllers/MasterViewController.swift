@@ -8,26 +8,20 @@
 
 import UIKit
 
-final class MasterViewController: UIViewController {
+final class MasterViewController: UIViewController, TrackSearchViewModelDelegate {
     @IBOutlet var tableView: UITableView!
     private var trackSearchViewModel: TrackSearchViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Configuration.shared.configure(apiKey: "3e993d0279bd62c8160982392010f7bf")
+        trackSearchViewModel = TrackSearchViewModel(artist: "Cher", autocorrect: false)
+        trackSearchViewModel?.delegate = self
     }
     
-    @IBAction func getTracks() {
-       
-        RequestManager.getTopTracks(endPoint: .getTopTracks(artist: "Cher", autocorrect: false)) { (result) in
-            switch result {
-            case .success(let value):
-                print(value)
-                
-            case .failure(let error):
-                print(error)
-            }
+    func reloadTableView() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
     }
 }
@@ -35,13 +29,14 @@ final class MasterViewController: UIViewController {
 extension MasterViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-      return 10
+        return trackSearchViewModel?.tracksCount ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      let cell = tableView.dequeueReusableCell(withIdentifier: "SearchCell", for: indexPath) as! SearchTrackTableViewCell
-      cell.titleLabel.text = "Track.name"
-      cell.artistLabel.text = "Artist.name"
-      return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchCell", for: indexPath) as! SearchTrackTableViewCell
+        if let cellModels = trackSearchViewModel?.trackCellModels {
+            cell.setTrackInfo(trackCellModel: cellModels[indexPath.row])
+        }
+        return cell
     }
 }

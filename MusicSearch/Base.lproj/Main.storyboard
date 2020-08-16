@@ -10,7 +10,6 @@
         <!--Navigation Controller-->
         <scene sceneID="Dqz-Pq-jMC">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zQv-Qq-Nln" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="fNc-rq-pvz" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xwg-lk-gA9">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -20,6 +19,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="rKL-Pb-kTA"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zQv-Qq-Nln" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-859" y="80"/>
         </scene>
@@ -31,7 +31,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zQi-MR-scx">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zQi-MR-scx">
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
@@ -46,19 +46,19 @@
                                                     <rect key="frame" x="25" y="16" width="75" height="75"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="ITz-Mk-7aR" secondAttribute="height" multiplier="1:1" id="ji7-Kc-MGT"/>
-                                                        <constraint firstAttribute="height" constant="70" id="mIt-6Z-Fef"/>
+                                                        <constraint firstAttribute="height" constant="50" id="mIt-6Z-Fef"/>
                                                     </constraints>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="bTa-sG-2ab">
                                                     <rect key="frame" x="110" y="31" width="95" height="45.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gus-nb-HFf" userLabel="Title">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Track Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gus-nb-HFf" userLabel="Title">
                                                             <rect key="frame" x="0.0" y="0.0" width="95" height="24"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5gr-uS-C7o" userLabel="Subtitle">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Artist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5gr-uS-C7o" userLabel="Subtitle">
                                                             <rect key="frame" x="0.0" y="24" width="95" height="21.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <nil key="textColor"/>
@@ -73,6 +73,7 @@
                                                 <constraint firstItem="bTa-sG-2ab" firstAttribute="leading" secondItem="ITz-Mk-7aR" secondAttribute="trailing" constant="10" id="Vjh-ZR-a0g"/>
                                                 <constraint firstItem="ITz-Mk-7aR" firstAttribute="centerY" secondItem="pPK-Er-u4e" secondAttribute="centerY" id="c15-O1-aeJ"/>
                                                 <constraint firstItem="bTa-sG-2ab" firstAttribute="centerY" secondItem="ITz-Mk-7aR" secondAttribute="centerY" id="fDh-3f-aaB"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bTa-sG-2ab" secondAttribute="trailing" constant="5" id="o8L-H5-GBm"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="ITz-Mk-7aR" secondAttribute="bottom" constant="5" id="r3Q-1H-zcm"/>
                                             </constraints>
                                         </tableViewCellContentView>

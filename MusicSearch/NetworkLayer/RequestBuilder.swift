@@ -9,7 +9,7 @@
 import Foundation
 
 class RequestBuilder {
-    public class func buildURLRequest(endPoint: RequestEndPoint) -> URLRequest? {
+    class func buildURLRequest(endPoint: RequestEndPoint) -> URLRequest? {
         var components = URLComponents()
         components.scheme = endPoint.scheme
         components.host = endPoint.host

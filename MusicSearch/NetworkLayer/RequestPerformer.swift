@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum SessionTaskError: Error {
+enum SessionTaskError: Error {
     /// Error for 'URLSession'.
     case connectionError(Error?)
 

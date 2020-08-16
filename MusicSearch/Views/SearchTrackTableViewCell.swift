@@ -21,8 +21,9 @@ class SearchTrackTableViewCell: UITableViewCell {
     }
     
     func setTrackInfo(trackCellModel: TrackSearchCellModel) {
-        trackImageView.sd_setImage(with: trackCellModel.trackImage, placeholderImage: UIImage(systemName: "person.circle"))
-
+        DispatchQueue.main.async {
+            self.trackImageView.sd_setImage(with: trackCellModel.trackImage, placeholderImage: UIImage(systemName: "person.circle"))
+        }
         titleLabel.text = trackCellModel.trackTitle
         artistLabel.text = trackCellModel.artistTitle
     }

@@ -10,7 +10,7 @@ import Foundation
 
 typealias Response = Result<TopTracksResponse, SessionTaskError>
 
-public class RequestManager {
+class RequestManager {
     static func getTopTracks(endPoint: RequestEndPoint, completion: @escaping (Response) -> Void) {
         // URLRequest
         guard let request = RequestBuilder.buildURLRequest(endPoint: endPoint) else {

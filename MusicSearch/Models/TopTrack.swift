@@ -8,8 +8,8 @@
 
 import Foundation
 
-public struct Image: Codable {
-    public var url: URL?
+struct Image: Codable {
+    var url: URL?
     private let text: String
     private let size: String
     
@@ -26,10 +26,10 @@ public struct Image: Codable {
     }
 }
 
-public struct Artist: Codable {
-    public let name: String
-    public var mbid: String?
-    public let url: URL
+struct Artist: Codable {
+    let name: String
+    var mbid: String?
+    let url: URL
 
     private enum CodingKeys: String, CodingKey {
         case name
@@ -38,16 +38,16 @@ public struct Artist: Codable {
     }
 }
 
-public struct TopTrack: Codable {
-    public let name: String
-    public let listeners: String
-    public let playcount: String
-    public var mbid: String?
-    public let url: URL
-    public let streamable: String
-    public var artist: Artist?
-    public let image: [Image]
-    public let rank: String
+struct TopTrack: Codable {
+    let name: String
+    let listeners: String
+    let playcount: String
+    var mbid: String?
+    let url: URL
+    let streamable: String
+    var artist: Artist?
+    let image: [Image]
+    let rank: String
 
     private enum CodingKeys: String, CodingKey {
         case name
@@ -65,7 +65,7 @@ public struct TopTrack: Codable {
         case rank
     }
     
-    public init(from decoder: Decoder) throws {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         name = try container.decode(String.self, forKey: .name)
@@ -83,9 +83,9 @@ public struct TopTrack: Codable {
     }
 }
 
-public struct TopTracksResponse: Codable {
-    public let list: [TopTrack]
-    public let attr: Attr
+struct TopTracksResponse: Codable {
+    let list: [TopTrack]
+    let attr: Attr
 
     private enum CodingKeys: String, CodingKey {
         case list
@@ -101,7 +101,7 @@ public struct TopTracksResponse: Codable {
         case attr = "@attr"
     }
 
-    public init(from decoder: Decoder) throws {
+    init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: TopTracksKeys.self)
         let recentTracks = try values.nestedContainer(keyedBy: TrackAttrKeys.self, forKey: .toptracks)
         self.attr = try recentTracks.decode(Attr.self, forKey: .attr)

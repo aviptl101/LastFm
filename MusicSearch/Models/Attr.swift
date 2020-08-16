@@ -8,12 +8,12 @@
 
 import Foundation
 
-public struct Attr: Codable {
-    public let user: String?
-    public let page: String
-    public let perPage: String
-    public let totalPages: String
-    public let total: String
+struct Attr: Codable {
+    let user: String?
+    let page: String
+    let perPage: String
+    let totalPages: String
+    let total: String
 
     enum CodingKeys: String, CodingKey {
         case user

@@ -8,24 +8,24 @@
 
 import Foundation
 
-public struct Tag: Codable {
-    public let name: String
-    public let url: URL
+struct Tag: Codable {
+    let name: String
+    let url: URL
 }
 
-public struct Wiki: Codable {
-    public let published: String
-    public let summary: String
-    public let content: String
+struct Wiki: Codable {
+    let published: String
+    let summary: String
+    let content: String
 }
 
-public struct Album: Codable {
-    public let artist: String
-    public let title: String
-    public let mbid: String?
-    public let url: URL
-    public var image: Image?
-    public let position: Int?
+struct Album: Codable {
+    let artist: String
+    let title: String
+    let mbid: String?
+    let url: URL
+    var image: Image?
+    let position: Int?
 
     private enum CodingKeys: String, CodingKey {
         case artist
@@ -50,21 +50,21 @@ private enum RankKeys: String, CodingKey {
     case rank
 }
 
-public struct TrackInfo: Codable {
-    public let name: String
-    public let url: URL
-    public var duration: Int?
-    public let streamable: String
-    public let listeners: String
-    public let playcount: String
-    public var artist: Artist?
-    public var toptags: [Tag]?
+struct TrackInfo: Codable {
+    let name: String
+    let url: URL
+    var duration: Int?
+    let streamable: String
+    let listeners: String
+    let playcount: String
+    var artist: Artist?
+    var toptags: [Tag]?
 
-    public var mbid: String?
-    public var album: Album?
-    public var userplaycount: Int?
-    public var userloved: Bool?
-    public var wiki: Wiki?
+    var mbid: String?
+    var album: Album?
+    var userplaycount: Int?
+    var userloved: Bool?
+    var wiki: Wiki?
 
     private enum CodingKeys: String, CodingKey {
         case name

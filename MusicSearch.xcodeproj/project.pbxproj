@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,7 @@
 		580E586F24E9432A0040826C /* TopTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E586E24E9432A0040826C /* TopTrack.swift */; };
 		580E587124E944340040826C /* Attr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E587024E944340040826C /* Attr.swift */; };
 		580E587824E9740A0040826C /* SearchTrackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E587724E9740A0040826C /* SearchTrackTableViewCell.swift */; };
+		580E587B24E97EF90040826C /* SearchTrackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E587A24E97EF90040826C /* SearchTrackViewModel.swift */; };
 		58133E2B24E8353C00B1A324 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58133E2A24E8353C00B1A324 /* AppDelegate.swift */; };
 		58133E2D24E8353C00B1A324 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58133E2C24E8353C00B1A324 /* SceneDelegate.swift */; };
 		58133E3224E8353C00B1A324 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58133E3024E8353C00B1A324 /* Main.storyboard */; };
@@ -56,6 +57,7 @@
 		580E586E24E9432A0040826C /* TopTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTrack.swift; sourceTree = "<group>"; };
 		580E587024E944340040826C /* Attr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attr.swift; sourceTree = "<group>"; };
 		580E587724E9740A0040826C /* SearchTrackTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTrackTableViewCell.swift; sourceTree = "<group>"; };
+		580E587A24E97EF90040826C /* SearchTrackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTrackViewModel.swift; sourceTree = "<group>"; };
 		58133E2724E8353C00B1A324 /* MusicSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58133E2A24E8353C00B1A324 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58133E2C24E8353C00B1A324 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -145,6 +147,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		580E587924E97E9B0040826C /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				580E587A24E97EF90040826C /* SearchTrackViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		58133E1E24E8353C00B1A324 = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +180,7 @@
 		58133E2924E8353C00B1A324 /* MusicSearch */ = {
 			isa = PBXGroup;
 			children = (
+				580E587924E97E9B0040826C /* ViewModels */,
 				580E587424E96AB30040826C /* Views */,
 				580E587324E96A8D0040826C /* Controllers */,
 				580E586224E8BA680040826C /* Models */,
@@ -224,7 +235,6 @@
 				6CBAD89701C8BD4468F36C24 /* Pods-MusicSearchTests.debug.xcconfig */,
 				87EE23F2F6D5886E278FBED7 /* Pods-MusicSearchTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -468,6 +478,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				580E587124E944340040826C /* Attr.swift in Sources */,
+				580E587B24E97EF90040826C /* SearchTrackViewModel.swift in Sources */,
 				580E586D24E8E0800040826C /* MasterViewController.swift in Sources */,
 				58133E5F24E87EF800B1A324 /* RequestPerformer.swift in Sources */,
 				580E586424E8BAA50040826C /* TrackModel.swift in Sources */,

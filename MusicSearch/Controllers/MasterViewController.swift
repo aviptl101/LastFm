@@ -53,8 +53,10 @@ extension MasterViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let trackDetailsVC = storyboard.instantiateViewController(withIdentifier: "TrackDetailsVC") as! TrackDetailsViewController
+        trackDetailsVC.trackInfo = trackSearchViewModel?.topTracks?[indexPath.row]
         trackDetailsVC.modalPresentationStyle = .overFullScreen
         self.present(trackDetailsVC, animated: false)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 

@@ -24,7 +24,7 @@ public struct Album: Codable {
     public let title: String
     public let mbid: String?
     public let url: URL
-    public let image: Image?
+    public var image: Image?
     public let position: Int?
 
     private enum CodingKeys: String, CodingKey {
@@ -53,18 +53,18 @@ private enum RankKeys: String, CodingKey {
 public struct TrackInfo: Codable {
     public let name: String
     public let url: URL
-    public let duration: Int?
+    public var duration: Int?
     public let streamable: String
     public let listeners: String
     public let playcount: String
-    public let artist: Artist?
-    public let toptags: [Tag]?
+    public var artist: Artist?
+    public var toptags: [Tag]?
 
-    public let mbid: String?
-    public let album: Album?
-    public let userplaycount: Int?
-    public let userloved: Bool?
-    public let wiki: Wiki?
+    public var mbid: String?
+    public var album: Album?
+    public var userplaycount: Int?
+    public var userloved: Bool?
+    public var wiki: Wiki?
 
     private enum CodingKeys: String, CodingKey {
         case name

@@ -9,7 +9,7 @@
 import Foundation
 
 public struct Image: Codable {
-    public let url: URL?
+    public var url: URL?
     private let text: String
     private let size: String
     
@@ -28,7 +28,7 @@ public struct Image: Codable {
 
 public struct Artist: Codable {
     public let name: String
-    public let mbid: String?
+    public var mbid: String?
     public let url: URL
 
     private enum CodingKeys: String, CodingKey {
@@ -45,7 +45,7 @@ public struct TopTrack: Codable {
     public var mbid: String?
     public let url: URL
     public let streamable: String
-    public let artist: Artist?
+    public var artist: Artist?
     public let image: [Image]
     public let rank: String
 
@@ -71,7 +71,9 @@ public struct TopTrack: Codable {
         name = try container.decode(String.self, forKey: .name)
         listeners = try container.decode(String.self, forKey: .listeners)
         playcount = try container.decode(String.self, forKey: .playcount)
-        mbid = try container.decode(String.self, forKey: .mbid)
+        if container.allKeys.contains(CodingKeys.mbid) {
+            mbid = try container.decode(String.self, forKey: .mbid)
+        }
         url = try container.decode(URL.self, forKey: .url)
         streamable = try container.decode(String.self, forKey: .streamable)
         artist = try container.decode(Artist.self, forKey: .artist)

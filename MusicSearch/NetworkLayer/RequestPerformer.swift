@@ -30,18 +30,15 @@ class RequestPerformer {
             case (_, _, let error?):
                 completion(.failure(.connectionError(error)))
 
-            case (let data, let response as HTTPURLResponse, _):
+            case (let data, _, _):
                 do {
                     guard let responseData = data else {
                         completion(.failure(.responseError(error)))
                         return
                     }
-                    let json = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String : [String : Any]]
-                    print(json ?? "errorrrrrrrr")
                     
                     let decoder = JSONDecoder()
                     let responseObject = try decoder.decode(T.self, from: responseData)
-                    print(responseObject)
                     DispatchQueue.main.async {
                         // CallBack Completion
                         completion(.success(responseObject))
@@ -50,8 +47,6 @@ class RequestPerformer {
                     print(error)
                     completion(.failure(.responseError(error)))
                 }
-            default:
-                completion(.failure(.responseError(error!)))
             }
         }
         dataTask.resume()

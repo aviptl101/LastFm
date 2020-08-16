@@ -33,7 +33,7 @@ final class TrackSearchViewModel {
             self?.delegate?.hideActivityIndicator()
             switch result {
             case .success(let value):
-                print(value)
+                //print(value)
                 self?.topTracks = value.list
                 self?.getTrackCellModels()
                 

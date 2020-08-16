@@ -11,9 +11,17 @@ import UIKit
 final class MasterViewController: UIViewController, TrackSearchViewModelDelegate {
     @IBOutlet var tableView: UITableView!
     private var trackSearchViewModel: TrackSearchViewModel?
-    
+    private let searchController = UISearchController(searchResultsController: nil)
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Artist"
+        searchController.searchBar.delegate = self
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
         
         trackSearchViewModel = TrackSearchViewModel(artist: "Cher", autocorrect: false)
         trackSearchViewModel?.delegate = self
@@ -38,5 +46,19 @@ extension MasterViewController: UITableViewDataSource {
             cell.setTrackInfo(trackCellModel: cellModels[indexPath.row])
         }
         return cell
+    }
+}
+
+extension MasterViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        
+        guard let searchText = searchBar.text else { return }
+        trackSearchViewModel?.searchArtist(searchText)
+    }
+}
+
+extension MasterViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
     }
 }

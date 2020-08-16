@@ -14,8 +14,8 @@ protocol TrackSearchViewModelDelegate: NSObject {
 
 final class TrackSearchViewModel {
     weak var delegate: TrackSearchViewModelDelegate?
-    var trackCellModels = [TrackSearchCellModel]()
     var topTracks: [TopTrack]?
+    var trackCellModels = [TrackSearchCellModel]()
     var tracksCount: Int {
         return trackCellModels.count
     }
@@ -24,7 +24,7 @@ final class TrackSearchViewModel {
         Configuration.shared.configure(apiKey: "3e993d0279bd62c8160982392010f7bf")
         getTopTracks(artist: artist, autocorrect: autocorrect)
     }
-
+    
     func getTopTracks(artist: String, autocorrect: Bool) {
         RequestManager.getTopTracks(endPoint: .getTopTracks(artist: artist, autocorrect: autocorrect)) { [weak self] (result) in
             switch result {
@@ -37,6 +37,10 @@ final class TrackSearchViewModel {
                 print(error)
             }
         }
+    }
+    
+    func searchArtist(_ searchText: String) {
+        getTopTracks(artist: searchText, autocorrect: false)
     }
     
     private func getTrackCellModels() {

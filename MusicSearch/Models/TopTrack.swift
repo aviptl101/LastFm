@@ -18,7 +18,7 @@ struct Image: Codable {
         case size
     }
     
-    public init(from decoder: Decoder) throws {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         text = try container.decode(String.self, forKey: .text)
         size = try container.decode(String.self, forKey: .size)

@@ -15,6 +15,7 @@ class SearchTrackTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        trackImageView.layer.cornerRadius = 3
     }
 }

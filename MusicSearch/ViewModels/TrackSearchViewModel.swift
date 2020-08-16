@@ -10,6 +10,8 @@ import Foundation
 
 protocol TrackSearchViewModelDelegate: NSObject {
     func reloadTableView()
+    func showActivityIndicator()
+    func hideActivityIndicator()
 }
 
 final class TrackSearchViewModel {
@@ -26,7 +28,9 @@ final class TrackSearchViewModel {
     }
     
     func getTopTracks(artist: String, autocorrect: Bool) {
+        delegate?.showActivityIndicator()
         RequestManager.getTopTracks(endPoint: .getTopTracks(artist: artist, autocorrect: autocorrect)) { [weak self] (result) in
+            self?.delegate?.hideActivityIndicator()
             switch result {
             case .success(let value):
                 print(value)

@@ -10,6 +10,7 @@ import UIKit
 
 final class MasterViewController: UIViewController, TrackSearchViewModelDelegate {
     @IBOutlet var tableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     private var trackSearchViewModel: TrackSearchViewModel?
     private let searchController = UISearchController(searchResultsController: nil)
 
@@ -30,6 +31,18 @@ final class MasterViewController: UIViewController, TrackSearchViewModelDelegate
     func reloadTableView() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
+        }
+    }
+    
+    func showActivityIndicator() {
+        DispatchQueue.main.async {
+            self.activityIndicator.startAnimating()
+        }
+    }
+    
+    func hideActivityIndicator() {
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
         }
     }
 }

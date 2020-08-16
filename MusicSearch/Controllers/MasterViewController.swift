@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MasterViewController.swift
 //  MusicSearch
 //
 //  Created by Avinash J Patel on 16/08/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MasterViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

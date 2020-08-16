@@ -10,7 +10,7 @@
 		580E586424E8BAA50040826C /* TrackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E586324E8BAA50040826C /* TrackModel.swift */; };
 		580E586824E8BF640040826C /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E586724E8BF640040826C /* Configuration.swift */; };
 		580E586B24E8C8960040826C /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E586A24E8C8960040826C /* RequestBuilder.swift */; };
-		580E586D24E8E0800040826C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E586C24E8E0800040826C /* ViewController.swift */; };
+		580E586D24E8E0800040826C /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E586C24E8E0800040826C /* MasterViewController.swift */; };
 		580E586F24E9432A0040826C /* TopTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E586E24E9432A0040826C /* TopTrack.swift */; };
 		580E587124E944340040826C /* Attr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E587024E944340040826C /* Attr.swift */; };
 		58133E2B24E8353C00B1A324 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58133E2A24E8353C00B1A324 /* AppDelegate.swift */; };
@@ -46,7 +46,7 @@
 		580E586324E8BAA50040826C /* TrackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackModel.swift; sourceTree = "<group>"; };
 		580E586724E8BF640040826C /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		580E586A24E8C8960040826C /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
-		580E586C24E8E0800040826C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		580E586C24E8E0800040826C /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		580E586E24E9432A0040826C /* TopTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTrack.swift; sourceTree = "<group>"; };
 		580E587024E944340040826C /* Attr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attr.swift; sourceTree = "<group>"; };
 		58133E2724E8353C00B1A324 /* MusicSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,6 +102,21 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		580E587324E96A8D0040826C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				580E586C24E8E0800040826C /* MasterViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		580E587424E96AB30040826C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		58133E1E24E8353C00B1A324 = {
 			isa = PBXGroup;
 			children = (
@@ -125,11 +140,12 @@
 		58133E2924E8353C00B1A324 /* MusicSearch */ = {
 			isa = PBXGroup;
 			children = (
+				580E587424E96AB30040826C /* Views */,
+				580E587324E96A8D0040826C /* Controllers */,
 				580E586224E8BA680040826C /* Models */,
 				58133E5A24E86EAF00B1A324 /* NetworkLayer */,
 				58133E2A24E8353C00B1A324 /* AppDelegate.swift */,
 				58133E2C24E8353C00B1A324 /* SceneDelegate.swift */,
-				580E586C24E8E0800040826C /* ViewController.swift */,
 				58133E3024E8353C00B1A324 /* Main.storyboard */,
 				58133E3324E8354400B1A324 /* Assets.xcassets */,
 				58133E3524E8354400B1A324 /* LaunchScreen.storyboard */,
@@ -300,7 +316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				580E587124E944340040826C /* Attr.swift in Sources */,
-				580E586D24E8E0800040826C /* ViewController.swift in Sources */,
+				580E586D24E8E0800040826C /* MasterViewController.swift in Sources */,
 				58133E5F24E87EF800B1A324 /* RequestPerformer.swift in Sources */,
 				580E586424E8BAA50040826C /* TrackModel.swift in Sources */,
 				580E586F24E9432A0040826C /* TopTrack.swift in Sources */,

@@ -10,6 +10,7 @@ import Foundation
 
 enum RequestEndPoint {
     case getTrackInfo(mbid: String? = nil, track: String? = nil, artist: String? = nil, username: String? = nil, autocorrect: Bool = false)
+    case getTopTracks(mbid: String? = nil, artist: String? = nil, autocorrect: Bool = false)
     
     public var scheme: String {
         return "https"
@@ -17,39 +18,45 @@ enum RequestEndPoint {
     
     public var method: String {
         switch self {
-        case .getTrackInfo:
+        case .getTrackInfo, .getTopTracks:
             return "GET"
         }
     }
     
     public var host: String {
-        return "ws.audioscrobbler.com/2.0"
+        return "ws.audioscrobbler.com"
     }
     
     public var path: String? {
         switch self {
-        case .getTrackInfo:
-            return nil
+        case .getTrackInfo, .getTopTracks:
+            return "/2.0/"
         }
     }
     
     public var parameters: [URLQueryItem] {
         switch self {
         case .getTrackInfo(let mbid, let track, let artist, let username, let autocorrect):
-            
             var query = [URLQueryItem]()
             if let mbid = mbid { query.append(URLQueryItem(name: "mbid", value: mbid)) }
             if let track = track { query.append(URLQueryItem(name: "track", value: track)) }
             if let artist = artist { query.append(URLQueryItem(name: "artist", value: artist)) }
             if let username = username { query.append(URLQueryItem(name: "username", value: username)) }
             query.append(URLQueryItem(name: "autocorrect", value: autocorrect ? "1" : "0"))
+            query.append(URLQueryItem(name: "method", value: "track.getInfo"))
             query.append(URLQueryItem(name: "format", value: "json"))
             query.append(URLQueryItem(name: "api_key", value: Configuration.shared.apiKey ?? ""))
-
             return query
             
-        default:
-            return []
+        case .getTopTracks(let mbid, let artist, let autocorrect):
+            var query = [URLQueryItem]()
+            if let mbid = mbid { query.append(URLQueryItem(name: "mbid", value: mbid)) }
+            if let artist = artist { query.append(URLQueryItem(name: "artist", value: artist)) }
+            query.append(URLQueryItem(name: "autocorrect", value: autocorrect ? "1" : "0"))
+            query.append(URLQueryItem(name: "method", value: "artist.gettoptracks"))
+            query.append(URLQueryItem(name: "format", value: "json"))
+            query.append(URLQueryItem(name: "api_key", value: Configuration.shared.apiKey ?? ""))
+            return query
         }
     }
 }

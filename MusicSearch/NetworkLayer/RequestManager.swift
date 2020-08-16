@@ -11,7 +11,7 @@ import Foundation
 typealias Response = Result<TopTracksResponse, SessionTaskError>
 
 public class RequestManager {
-    static func getTrackInfo(endPoint: RequestEndPoint, completion: @escaping (Response) -> Void) {
+    static func getTopTracks(endPoint: RequestEndPoint, completion: @escaping (Response) -> Void) {
         // URLRequest
         guard let request = RequestBuilder.buildURLRequest(endPoint: endPoint) else {
             completion(.failure(.requestError))

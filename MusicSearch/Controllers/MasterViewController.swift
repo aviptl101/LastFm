@@ -19,7 +19,7 @@ class MasterViewController: UIViewController {
     
     @IBAction func getTracks() {
        
-        RequestManager.getTrackInfo(endPoint: .getTrackInfo(track: "being", autocorrect: false)) { (result) in
+        RequestManager.getTopTracks(endPoint: .getTopTracks(artist: "Cher", autocorrect: false)) { (result) in
             switch result {
             case .success(let value):
                 print(value)

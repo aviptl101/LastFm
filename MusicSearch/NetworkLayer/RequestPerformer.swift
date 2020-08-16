@@ -9,13 +9,13 @@
 import Foundation
 
 public enum SessionTaskError: Error {
-    /// Error for `URLSession`.
+    /// Error for 'URLSession'.
     case connectionError(Error?)
 
-    /// Error while creating `URLReqeust`.
+    /// Error while creating 'URLReqeust'.
     case requestError
 
-    /// Error while creating `Response`.
+    /// Error while creating 'Response'.
     case responseError(Error?)
 }
 

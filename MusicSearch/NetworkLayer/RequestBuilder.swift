@@ -10,7 +10,6 @@ import Foundation
 
 class RequestBuilder {
     public class func buildURLRequest(endPoint: RequestEndPoint) -> URLRequest? {
-        
         var components = URLComponents()
         components.scheme = endPoint.scheme
         components.host = endPoint.host
@@ -19,7 +18,7 @@ class RequestBuilder {
 
         // URLRequest
         guard let url = components.url else { return nil }
-        var urlRequest = URLRequest(url: URL(string: "https://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=cher&api_key=3e993d0279bd62c8160982392010f7bf&format=json") ?? url)
+        var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = endPoint.method
         
         return urlRequest

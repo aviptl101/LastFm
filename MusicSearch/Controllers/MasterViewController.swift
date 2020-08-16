@@ -49,6 +49,15 @@ extension MasterViewController: UITableViewDataSource {
     }
 }
 
+extension MasterViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let trackDetailsVC = storyboard.instantiateViewController(withIdentifier: "TrackDetailsVC") as! TrackDetailsViewController
+        trackDetailsVC.modalPresentationStyle = .overFullScreen
+        self.present(trackDetailsVC, animated: false)
+    }
+}
+
 extension MasterViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar

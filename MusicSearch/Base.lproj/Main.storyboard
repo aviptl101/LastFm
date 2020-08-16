@@ -32,18 +32,85 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xZ3-eh-L9U">
-                                <rect key="frame" x="140" y="317" width="134" height="62"/>
+                                <rect key="frame" x="140" y="779" width="134" height="62"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <color key="backgroundColor" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Search"/>
                                 <connections>
                                     <action selector="getTracks" destination="BYZ-38-t0r" eventType="touchUpInside" id="Tgu-77-H1m"/>
                                 </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zQi-MR-scx">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SearchCell" rowHeight="107" id="Jcn-0e-MLl" customClass="SearchTrackTableViewCell" customModule="MusicSearch" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="107"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jcn-0e-MLl" id="pPK-Er-u4e">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="107"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ITz-Mk-7aR">
+                                                    <rect key="frame" x="25" y="16" width="75" height="75"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="ITz-Mk-7aR" secondAttribute="height" multiplier="1:1" id="ji7-Kc-MGT"/>
+                                                        <constraint firstAttribute="height" constant="70" id="mIt-6Z-Fef"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="bTa-sG-2ab">
+                                                    <rect key="frame" x="110" y="31" width="95" height="45.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Track Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gus-nb-HFf" userLabel="Title">
+                                                            <rect key="frame" x="0.0" y="0.0" width="95" height="24"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Artist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5gr-uS-C7o" userLabel="Subtitle">
+                                                            <rect key="frame" x="0.0" y="24" width="95" height="21.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ITz-Mk-7aR" firstAttribute="top" secondItem="pPK-Er-u4e" secondAttribute="topMargin" constant="5" id="9zb-Tc-aF2"/>
+                                                <constraint firstItem="ITz-Mk-7aR" firstAttribute="leading" secondItem="pPK-Er-u4e" secondAttribute="leadingMargin" constant="5" id="Idh-mX-INi"/>
+                                                <constraint firstItem="bTa-sG-2ab" firstAttribute="leading" secondItem="ITz-Mk-7aR" secondAttribute="trailing" constant="10" id="Vjh-ZR-a0g"/>
+                                                <constraint firstItem="ITz-Mk-7aR" firstAttribute="centerY" secondItem="pPK-Er-u4e" secondAttribute="centerY" id="c15-O1-aeJ"/>
+                                                <constraint firstItem="bTa-sG-2ab" firstAttribute="centerY" secondItem="ITz-Mk-7aR" secondAttribute="centerY" id="fDh-3f-aaB"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="ITz-Mk-7aR" secondAttribute="bottom" constant="5" id="r3Q-1H-zcm"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="artistLabel" destination="5gr-uS-C7o" id="Rd0-tK-LfV"/>
+                                            <outlet property="titleLabel" destination="Gus-nb-HFf" id="nio-FF-47O"/>
+                                            <outlet property="trackImageView" destination="ITz-Mk-7aR" id="KaZ-Ok-sFd"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="H8y-mk-tlr"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="EtX-Rj-kTr"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zQi-MR-scx" secondAttribute="trailing" id="ZEd-so-iNZ"/>
+                            <constraint firstAttribute="bottom" secondItem="zQi-MR-scx" secondAttribute="bottom" id="gMB-Cn-kmX"/>
+                            <constraint firstItem="zQi-MR-scx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="oMm-ZV-Dsj"/>
+                            <constraint firstItem="zQi-MR-scx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="w0V-ik-r71"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Last FM" id="tTk-WR-Rri"/>
+                    <connections>
+                        <outlet property="tableView" destination="zQi-MR-scx" id="qKK-62-YFO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

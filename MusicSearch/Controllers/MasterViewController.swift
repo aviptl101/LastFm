@@ -9,6 +9,7 @@
 import UIKit
 
 class MasterViewController: UIViewController {
+    @IBOutlet var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,5 +28,19 @@ class MasterViewController: UIViewController {
                 print(error)
             }
         }
+    }
+}
+
+extension MasterViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView,
+                   numberOfRowsInSection section: Int) -> Int {
+      return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+      let cell = tableView.dequeueReusableCell(withIdentifier: "SearchCell", for: indexPath) as! SearchTrackTableViewCell
+      cell.titleLabel.text = "Track.name"
+      cell.artistLabel.text = "Artist.name"
+      return cell
     }
 }

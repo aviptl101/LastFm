@@ -9,7 +9,7 @@
 import Foundation
 
 protocol TrackSearchViewModelDelegate: NSObject {
-    func reloadTableView()
+    func reloadTableView(page: Int?)
     func showActivityIndicator()
     func hideActivityIndicator()
 }
@@ -26,7 +26,7 @@ final class TrackSearchViewModel {
     private var lastSearchedArtist = ""
     
     init(artist: String, autocorrect: Bool) {
-        Configuration.shared.configure(apiKey: "3e993d0279bd62c8160982392010f7bf")
+        Configuration.shared.configure(apiKey: Constants.apiKey)
         getTopTracks(artist: artist, page: 1, autocorrect: autocorrect)
     }
     
@@ -72,6 +72,6 @@ final class TrackSearchViewModel {
             let trackCellModel = TrackSearchCellModel(trackImage: track.image[0].url, trackTitle: track.name, artistTitle: track.artist?.name)
             self.trackCellModels.append(trackCellModel)
         }
-        self.delegate?.reloadTableView()
+        self.delegate?.reloadTableView(page: currentPageIndex)
     }
 }

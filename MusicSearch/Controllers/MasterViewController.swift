@@ -11,26 +11,31 @@ import UIKit
 final class MasterViewController: UIViewController, TrackSearchViewModelDelegate {
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var pageLabel: UILabel!
     private var trackSearchViewModel: TrackSearchViewModel?
     private let searchController = UISearchController(searchResultsController: nil)
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Artist"
-        searchController.searchBar.delegate = self
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
-        trackSearchViewModel = TrackSearchViewModel(artist: "Cher", autocorrect: false)
+        trackSearchViewModel = TrackSearchViewModel(artist: Constants.initialSearch, autocorrect: false)
         trackSearchViewModel?.delegate = self
     }
     
-    func reloadTableView() {
+    // MARK: TrackSearchViewModelDelegate Methods
+    
+    func reloadTableView(page: Int?) {
         DispatchQueue.main.async {
             self.tableView.reloadData()
+            if let page = page {
+                self.pageLabel.text = "Page: \(page)"
+            }
         }
     }
     
@@ -67,6 +72,10 @@ extension MasterViewController: UITableViewDataSource {
         if indexPath.row == count - 1 {
             trackSearchViewModel?.loadNextPageTracks()
         }
+        
+        //Updating Page Count to Page Label
+        let pageIndex = (indexPath.row / Constants.itemsPerPage) + 1
+        self.pageLabel.text = "Page: \(pageIndex)"
     }
 }
 
@@ -87,10 +96,5 @@ extension MasterViewController: UISearchResultsUpdating {
         
         guard let searchText = searchBar.text else { return }
         trackSearchViewModel?.searchArtist(searchText)
-    }
-}
-
-extension MasterViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
     }
 }

@@ -19,6 +19,7 @@
 		580E587B24E97EF90040826C /* TrackSearchCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E587A24E97EF90040826C /* TrackSearchCellModel.swift */; };
 		580E587D24E9892F0040826C /* TrackSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E587C24E9892F0040826C /* TrackSearchViewModel.swift */; };
 		580E587F24E9CEEB0040826C /* TrackDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E587E24E9CEEB0040826C /* TrackDetailsViewController.swift */; };
+		580E588124EA15A00040826C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E588024EA159F0040826C /* Constants.swift */; };
 		58133E2B24E8353C00B1A324 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58133E2A24E8353C00B1A324 /* AppDelegate.swift */; };
 		58133E2D24E8353C00B1A324 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58133E2C24E8353C00B1A324 /* SceneDelegate.swift */; };
 		58133E3224E8353C00B1A324 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58133E3024E8353C00B1A324 /* Main.storyboard */; };
@@ -62,6 +63,7 @@
 		580E587A24E97EF90040826C /* TrackSearchCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackSearchCellModel.swift; sourceTree = "<group>"; };
 		580E587C24E9892F0040826C /* TrackSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackSearchViewModel.swift; sourceTree = "<group>"; };
 		580E587E24E9CEEB0040826C /* TrackDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDetailsViewController.swift; sourceTree = "<group>"; };
+		580E588024EA159F0040826C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		58133E2724E8353C00B1A324 /* MusicSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58133E2A24E8353C00B1A324 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58133E2C24E8353C00B1A324 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				580E587324E96A8D0040826C /* Controllers */,
 				580E586224E8BA680040826C /* Models */,
 				58133E5A24E86EAF00B1A324 /* NetworkLayer */,
+				580E588024EA159F0040826C /* Constants.swift */,
 				58133E2A24E8353C00B1A324 /* AppDelegate.swift */,
 				58133E2C24E8353C00B1A324 /* SceneDelegate.swift */,
 				58133E3024E8353C00B1A324 /* Main.storyboard */,
@@ -490,6 +493,7 @@
 				58133E5F24E87EF800B1A324 /* RequestPerformer.swift in Sources */,
 				580E586424E8BAA50040826C /* TrackModel.swift in Sources */,
 				580E586F24E9432A0040826C /* TopTrack.swift in Sources */,
+				580E588124EA15A00040826C /* Constants.swift in Sources */,
 				580E587F24E9CEEB0040826C /* TrackDetailsViewController.swift in Sources */,
 				58133E6024E87EF800B1A324 /* RequestEndPoint.swift in Sources */,
 				580E586824E8BF640040826C /* Configuration.swift in Sources */,

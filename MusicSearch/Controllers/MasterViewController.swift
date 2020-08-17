@@ -13,7 +13,7 @@ final class MasterViewController: UIViewController, TrackSearchViewModelDelegate
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     private var trackSearchViewModel: TrackSearchViewModel?
     private let searchController = UISearchController(searchResultsController: nil)
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -60,13 +60,21 @@ extension MasterViewController: UITableViewDataSource {
         }
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let count = trackSearchViewModel?.tracksCount else { return }
+        
+        if indexPath.row == count - 1 {
+            trackSearchViewModel?.loadNextPageTracks()
+        }
+    }
 }
 
 extension MasterViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let trackDetailsVC = storyboard.instantiateViewController(withIdentifier: "TrackDetailsVC") as! TrackDetailsViewController
-        trackDetailsVC.trackInfo = trackSearchViewModel?.topTracks?[indexPath.row]
+        trackDetailsVC.trackInfo = trackSearchViewModel?.allTopTracks[indexPath.row]
         trackDetailsVC.modalPresentationStyle = .overFullScreen
         self.present(trackDetailsVC, animated: false)
         tableView.deselectRow(at: indexPath, animated: true)

@@ -155,8 +155,8 @@
 		580E587924E97E9B0040826C /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				580E587A24E97EF90040826C /* TrackSearchCellModel.swift */,
 				580E587C24E9892F0040826C /* TrackSearchViewModel.swift */,
+				580E587A24E97EF90040826C /* TrackSearchCellModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";

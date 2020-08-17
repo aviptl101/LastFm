@@ -10,7 +10,7 @@ import Foundation
 
 enum RequestEndPoint {
     case getTrackInfo(mbid: String? = nil, track: String? = nil, artist: String? = nil, username: String? = nil, autocorrect: Bool = false)
-    case getTopTracks(mbid: String? = nil, artist: String? = nil, autocorrect: Bool = false)
+    case getTopTracks(mbid: String? = nil, artist: String? = nil, page: Int? = nil, autocorrect: Bool = false)
     
     public var scheme: String {
         return "https"
@@ -48,10 +48,11 @@ enum RequestEndPoint {
             query.append(URLQueryItem(name: "api_key", value: Configuration.shared.apiKey ?? ""))
             return query
             
-        case .getTopTracks(let mbid, let artist, let autocorrect):
+        case .getTopTracks(let mbid, let artist, let page, let autocorrect):
             var query = [URLQueryItem]()
             if let mbid = mbid { query.append(URLQueryItem(name: "mbid", value: mbid)) }
             if let artist = artist { query.append(URLQueryItem(name: "artist", value: artist)) }
+            if let page = page { query.append(URLQueryItem(name: "page", value: String(page))) }
             query.append(URLQueryItem(name: "autocorrect", value: autocorrect ? "1" : "0"))
             query.append(URLQueryItem(name: "method", value: "artist.gettoptracks"))
             query.append(URLQueryItem(name: "format", value: "json"))

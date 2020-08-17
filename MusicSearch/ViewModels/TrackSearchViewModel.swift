@@ -52,6 +52,13 @@ final class TrackSearchViewModel {
         getTopTracks(artist: lastSearchedArtist, page: currentPageIndex, autocorrect: false)
     }
     
+    func reloadPage() {
+        if lastSearchedArtist == "" {
+            lastSearchedArtist = Constants.initialSearch
+        }
+        getTopTracks(artist: lastSearchedArtist, page: currentPageIndex, autocorrect: false)
+    }
+    
     func searchArtist(_ searchText: String) {
         getTopTracks(artist: searchText, page: 1, autocorrect: false)
     }

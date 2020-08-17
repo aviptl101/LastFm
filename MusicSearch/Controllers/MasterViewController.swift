@@ -13,6 +13,7 @@ final class MasterViewController: UIViewController, TrackSearchViewModelDelegate
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var pageLabel: UILabel!
     private var trackSearchViewModel: TrackSearchViewModel?
+    private let refreshControl = UIRefreshControl()
     private let searchController = UISearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
@@ -24,8 +25,19 @@ final class MasterViewController: UIViewController, TrackSearchViewModelDelegate
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
+        refreshControl.addTarget(self, action: #selector(getSearchData), for: .valueChanged)
+        refreshControl.frame = tableView.frame
+        refreshControl.center = tableView.center
+        tableView.refreshControl = refreshControl
+        tableView.refreshControl?.isHidden = true
+        refreshControl.isHidden = true
+        
         trackSearchViewModel = TrackSearchViewModel(artist: Constants.initialSearch, autocorrect: false)
         trackSearchViewModel?.delegate = self
+    }
+    
+    @objc private func getSearchData() {
+        trackSearchViewModel?.reloadPage()
     }
     
     // MARK: TrackSearchViewModelDelegate Methods
@@ -42,6 +54,7 @@ final class MasterViewController: UIViewController, TrackSearchViewModelDelegate
     func showActivityIndicator() {
         DispatchQueue.main.async {
             self.activityIndicator.startAnimating()
+            self.refreshControl.endRefreshing()
         }
     }
     

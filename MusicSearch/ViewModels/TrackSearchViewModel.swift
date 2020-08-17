@@ -23,8 +23,8 @@ final class TrackSearchViewModel {
     var tracksCount: Int {
         return trackCellModels.count
     }
-    private var currentPageIndex = 1
-    private var lastSearchedArtist = ""
+    var currentPageIndex = 1
+    var lastSearchedArtist = ""
     
     init(artist: String, autocorrect: Bool) {
         Configuration.shared.configure(apiKey: Constants.apiKey)
@@ -32,9 +32,7 @@ final class TrackSearchViewModel {
     }
     
     func getTopTracks(artist: String, page: Int, autocorrect: Bool) {
-        if artist == "" {
-            return
-        }
+        if artist.isEmpty { return }
         delegate?.showActivityIndicator()
         RequestManager.getTopTracks(endPoint: .getTopTracks(artist: artist, page: page, autocorrect: autocorrect)) { [weak self] (result) in
             self?.delegate?.hideActivityIndicator()
@@ -60,7 +58,7 @@ final class TrackSearchViewModel {
     }
     
     func reloadPage() {
-        if lastSearchedArtist == "" {
+        if lastSearchedArtist.isEmpty {
             lastSearchedArtist = Constants.initialSearch
         }
         getTopTracks(artist: lastSearchedArtist, page: currentPageIndex, autocorrect: false)

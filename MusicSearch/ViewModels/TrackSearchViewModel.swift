@@ -44,7 +44,7 @@ final class TrackSearchViewModel {
                 self?.lastSearchedArtist = artist
             case .failure(let error):
                 print(error)
-                self?.delegate?.showAlert(message: error.localizedDescription)
+                self?.delegate?.showAlert(message: error.errorMessage)
             }
         }
     }

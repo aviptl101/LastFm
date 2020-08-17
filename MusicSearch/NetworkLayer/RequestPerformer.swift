@@ -17,6 +17,17 @@ enum SessionTaskError: Error {
 
     /// Error while creating 'Response'.
     case responseError(Error?)
+    
+    var errorMessage: String {
+        switch self {
+        case .connectionError(_):
+            return "Operation Failed. Network Error. Try Later"
+        case .requestError:
+            return "Operation Failed. Improper Request"
+        case .responseError(_):
+            return "Operation Failed. Response is not in proper format"
+        }
+    }
 }
 
 class RequestPerformer {

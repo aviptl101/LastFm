@@ -32,3 +32,7 @@ class Utility {
         view.present(alert, animated: true, completion: nil)
     }
 }
+
+extension UIColor {
+    static let lastfmPink = UIColor(red: 255.0/255.0, green: 12.0/255.0, blue: 83.0/255.0, alpha: 1.0)
+}

@@ -32,6 +32,9 @@ final class TrackSearchViewModel {
     }
     
     func getTopTracks(artist: String, page: Int, autocorrect: Bool) {
+        if artist == "" {
+            return
+        }
         delegate?.showActivityIndicator()
         RequestManager.getTopTracks(endPoint: .getTopTracks(artist: artist, page: page, autocorrect: autocorrect)) { [weak self] (result) in
             self?.delegate?.hideActivityIndicator()
@@ -44,7 +47,9 @@ final class TrackSearchViewModel {
                 self?.lastSearchedArtist = artist
             case .failure(let error):
                 print(error)
-                self?.delegate?.showAlert(message: error.errorMessage)
+                if error != SessionTaskError.responseError {
+                    self?.delegate?.showAlert(message: error.errorMessage)
+                }
             }
         }
     }

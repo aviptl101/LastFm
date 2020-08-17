@@ -10,21 +10,21 @@ import Foundation
 
 enum SessionTaskError: Error {
     /// Error for 'URLSession'.
-    case connectionError(Error?)
+    case connectionError
 
     /// Error while creating 'URLReqeust'.
     case requestError
 
     /// Error while creating 'Response'.
-    case responseError(Error?)
+    case responseError
     
     var errorMessage: String {
         switch self {
-        case .connectionError(_):
+        case .connectionError:
             return "Operation Failed. Network Error. Try Later"
         case .requestError:
             return "Operation Failed. Improper Request"
-        case .responseError(_):
+        case .responseError:
             return "Operation Failed. Response is not in proper format"
         }
     }
@@ -39,12 +39,13 @@ class RequestPerformer {
             
             switch (data, response, error) {
             case (_, _, let error?):
-                completion(.failure(.connectionError(error)))
+                print(error)
+                completion(.failure(.connectionError))
 
             case (let data, _, _):
                 do {
                     guard let responseData = data else {
-                        completion(.failure(.responseError(error)))
+                        completion(.failure(.responseError))
                         return
                     }
                     
@@ -56,7 +57,7 @@ class RequestPerformer {
                     }
                 } catch {
                     print(error)
-                    completion(.failure(.responseError(error)))
+                    completion(.failure(.responseError))
                 }
             }
         }

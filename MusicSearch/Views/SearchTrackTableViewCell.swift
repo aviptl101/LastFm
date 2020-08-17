@@ -17,6 +17,9 @@ class SearchTrackTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        layer.cornerRadius = 3
+        layer.borderWidth = 0.5
+        layer.borderColor = UIColor.lightGray.cgColor
         trackImageView.layer.cornerRadius = 3
     }
     

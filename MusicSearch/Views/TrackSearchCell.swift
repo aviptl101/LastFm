@@ -1,5 +1,5 @@
 //
-//  SearchTrackTableViewCell.swift
+//  TrackSearchCell.swift
 //  MusicSearch
 //
 //  Created by Avinash J Patel on 16/08/20.
@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 
-class SearchTrackTableViewCell: UITableViewCell {
+class TrackSearchCell: UITableViewCell {
     @IBOutlet weak var trackImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var artistLabel: UILabel!

@@ -8,33 +8,29 @@
 
 import Foundation
 
-struct Image: Codable {
-    var url: URL?
-    private let text: String
-    private let size: String
-    
-    enum CodingKeys: String, CodingKey {
-        case text = "#text"
-        case size
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        text = try container.decode(String.self, forKey: .text)
-        size = try container.decode(String.self, forKey: .size)
-        url = URL(string: text)
-    }
-}
-
-struct Artist: Codable {
-    let name: String
-    var mbid: String?
-    let url: URL
+struct TopTracksResponse: Codable {
+    let list: [TopTrack]
+    let attr: Attr
 
     private enum CodingKeys: String, CodingKey {
-        case name
-        case mbid
-        case url
+        case list
+        case attr
+    }
+
+    private enum TopTracksKeys: String, CodingKey {
+        case toptracks
+    }
+
+    private enum TrackAttrKeys: String, CodingKey {
+        case track
+        case attr = "@attr"
+    }
+
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: TopTracksKeys.self)
+        let recentTracks = try values.nestedContainer(keyedBy: TrackAttrKeys.self, forKey: .toptracks)
+        self.attr = try recentTracks.decode(Attr.self, forKey: .attr)
+        self.list = try recentTracks.decode([TopTrack].self, forKey: .track)
     }
 }
 
@@ -83,28 +79,32 @@ struct TopTrack: Codable {
     }
 }
 
-struct TopTracksResponse: Codable {
-    let list: [TopTrack]
-    let attr: Attr
+struct Image: Codable {
+    var url: URL?
+    private let text: String
+    private let size: String
+    
+    enum CodingKeys: String, CodingKey {
+        case text = "#text"
+        case size
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        text = try container.decode(String.self, forKey: .text)
+        size = try container.decode(String.self, forKey: .size)
+        url = URL(string: text)
+    }
+}
+
+struct Artist: Codable {
+    let name: String
+    var mbid: String?
+    var url: URL?
 
     private enum CodingKeys: String, CodingKey {
-        case list
-        case attr
-    }
-
-    private enum TopTracksKeys: String, CodingKey {
-        case toptracks
-    }
-
-    private enum TrackAttrKeys: String, CodingKey {
-        case track
-        case attr = "@attr"
-    }
-
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: TopTracksKeys.self)
-        let recentTracks = try values.nestedContainer(keyedBy: TrackAttrKeys.self, forKey: .toptracks)
-        self.attr = try recentTracks.decode(Attr.self, forKey: .attr)
-        self.list = try recentTracks.decode([TopTrack].self, forKey: .track)
+        case name
+        case mbid
+        case url
     }
 }

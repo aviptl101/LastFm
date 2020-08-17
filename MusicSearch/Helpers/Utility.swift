@@ -31,6 +31,10 @@ class Utility {
         */
         view.present(alert, animated: true, completion: nil)
     }
+    
+    static func getEncoded<Model: Encodable>(_ obj: Model) -> Data? {
+        return try? JSONEncoder().encode(obj)
+    }
 }
 
 extension UIColor {

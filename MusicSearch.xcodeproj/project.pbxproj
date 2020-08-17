@@ -9,13 +9,12 @@
 /* Begin PBXBuildFile section */
 		0001D077CDA47F164ECC93F1 /* Pods_MusicSearchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A73C0D920AE6A53A5897EB6 /* Pods_MusicSearchTests.framework */; };
 		4CEDCD97562F15544AE4652D /* Pods_MusicSearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A571B4AEB01D5508E47AB77E /* Pods_MusicSearch.framework */; };
-		580E586424E8BAA50040826C /* TrackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E586324E8BAA50040826C /* TrackModel.swift */; };
 		580E586824E8BF640040826C /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E586724E8BF640040826C /* Configuration.swift */; };
 		580E586B24E8C8960040826C /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E586A24E8C8960040826C /* RequestBuilder.swift */; };
 		580E586D24E8E0800040826C /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E586C24E8E0800040826C /* MasterViewController.swift */; };
 		580E586F24E9432A0040826C /* TopTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E586E24E9432A0040826C /* TopTrack.swift */; };
 		580E587124E944340040826C /* Attr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E587024E944340040826C /* Attr.swift */; };
-		580E587824E9740A0040826C /* SearchTrackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E587724E9740A0040826C /* SearchTrackTableViewCell.swift */; };
+		580E587824E9740A0040826C /* TrackSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E587724E9740A0040826C /* TrackSearchCell.swift */; };
 		580E587B24E97EF90040826C /* TrackSearchCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E587A24E97EF90040826C /* TrackSearchCellModel.swift */; };
 		580E587D24E9892F0040826C /* TrackSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E587C24E9892F0040826C /* TrackSearchViewModel.swift */; };
 		580E587F24E9CEEB0040826C /* TrackDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E587E24E9CEEB0040826C /* TrackDetailsViewController.swift */; };
@@ -31,6 +30,9 @@
 		58133E5E24E87EF800B1A324 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58133E5B24E87EF800B1A324 /* RequestManager.swift */; };
 		58133E5F24E87EF800B1A324 /* RequestPerformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58133E5C24E87EF800B1A324 /* RequestPerformer.swift */; };
 		58133E6024E87EF800B1A324 /* RequestEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58133E5D24E87EF800B1A324 /* RequestEndPoint.swift */; };
+		58714AF824EB25CC00299BC4 /* TopTrack+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58714AF724EB25CC00299BC4 /* TopTrack+Extensions.swift */; };
+		58714AFE24EB3B2300299BC4 /* TopTrackMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58714AFA24EB304400299BC4 /* TopTrackMock.swift */; };
+		58714AFF24EB3B2800299BC4 /* AttrMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58714AFC24EB30EC00299BC4 /* AttrMock.swift */; };
 		79AD7DEC2D42040D2F21C4A1 /* Pods_MusicSearch_MusicSearchUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 642EE82629FABE16BF631583 /* Pods_MusicSearch_MusicSearchUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,13 +56,12 @@
 /* Begin PBXFileReference section */
 		05E1F291A7A12CA7A91E26AB /* Pods-MusicSearch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicSearch.release.xcconfig"; path = "Target Support Files/Pods-MusicSearch/Pods-MusicSearch.release.xcconfig"; sourceTree = "<group>"; };
 		171D9DAB9DDEE348A4258E92 /* Pods-MusicSearch-MusicSearchUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicSearch-MusicSearchUITests.debug.xcconfig"; path = "Target Support Files/Pods-MusicSearch-MusicSearchUITests/Pods-MusicSearch-MusicSearchUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		580E586324E8BAA50040826C /* TrackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackModel.swift; sourceTree = "<group>"; };
 		580E586724E8BF640040826C /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		580E586A24E8C8960040826C /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
 		580E586C24E8E0800040826C /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		580E586E24E9432A0040826C /* TopTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTrack.swift; sourceTree = "<group>"; };
 		580E587024E944340040826C /* Attr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attr.swift; sourceTree = "<group>"; };
-		580E587724E9740A0040826C /* SearchTrackTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTrackTableViewCell.swift; sourceTree = "<group>"; };
+		580E587724E9740A0040826C /* TrackSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackSearchCell.swift; sourceTree = "<group>"; };
 		580E587A24E97EF90040826C /* TrackSearchCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackSearchCellModel.swift; sourceTree = "<group>"; };
 		580E587C24E9892F0040826C /* TrackSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackSearchViewModel.swift; sourceTree = "<group>"; };
 		580E587E24E9CEEB0040826C /* TrackDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDetailsViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +83,9 @@
 		58133E5B24E87EF800B1A324 /* RequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		58133E5C24E87EF800B1A324 /* RequestPerformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestPerformer.swift; sourceTree = "<group>"; };
 		58133E5D24E87EF800B1A324 /* RequestEndPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestEndPoint.swift; sourceTree = "<group>"; };
+		58714AF724EB25CC00299BC4 /* TopTrack+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TopTrack+Extensions.swift"; sourceTree = "<group>"; };
+		58714AFA24EB304400299BC4 /* TopTrackMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTrackMock.swift; sourceTree = "<group>"; };
+		58714AFC24EB30EC00299BC4 /* AttrMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttrMock.swift; sourceTree = "<group>"; };
 		62EB5D7C7DCFC129EC75100E /* Pods-MusicSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicSearch.debug.xcconfig"; path = "Target Support Files/Pods-MusicSearch/Pods-MusicSearch.debug.xcconfig"; sourceTree = "<group>"; };
 		642EE82629FABE16BF631583 /* Pods_MusicSearch_MusicSearchUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicSearch_MusicSearchUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CBAD89701C8BD4468F36C24 /* Pods-MusicSearchTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicSearchTests.debug.xcconfig"; path = "Target Support Files/Pods-MusicSearchTests/Pods-MusicSearchTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -132,7 +136,7 @@
 		580E586224E8BA680040826C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				580E586324E8BAA50040826C /* TrackModel.swift */,
+				58714AF924EB302E00299BC4 /* Mocks */,
 				580E586E24E9432A0040826C /* TopTrack.swift */,
 				580E587024E944340040826C /* Attr.swift */,
 			);
@@ -151,7 +155,7 @@
 		580E587424E96AB30040826C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				580E587724E9740A0040826C /* SearchTrackTableViewCell.swift */,
+				580E587724E9740A0040826C /* TrackSearchCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -199,6 +203,7 @@
 		58133E2924E8353C00B1A324 /* MusicSearch */ = {
 			isa = PBXGroup;
 			children = (
+				58714AF424EB1A1000299BC4 /* Extensions */,
 				580E588224EA288F0040826C /* Helpers */,
 				580E587924E97E9B0040826C /* ViewModels */,
 				580E587424E96AB30040826C /* Views */,
@@ -243,6 +248,23 @@
 				580E586724E8BF640040826C /* Configuration.swift */,
 			);
 			path = NetworkLayer;
+			sourceTree = "<group>";
+		};
+		58714AF424EB1A1000299BC4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				58714AF724EB25CC00299BC4 /* TopTrack+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		58714AF924EB302E00299BC4 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				58714AFA24EB304400299BC4 /* TopTrackMock.swift */,
+				58714AFC24EB30EC00299BC4 /* AttrMock.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		70A9FFAA4D43994B8EFDC66A /* Pods */ = {
@@ -498,22 +520,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				580E587D24E9892F0040826C /* TrackSearchViewModel.swift in Sources */,
+				58714AF824EB25CC00299BC4 /* TopTrack+Extensions.swift in Sources */,
 				580E587124E944340040826C /* Attr.swift in Sources */,
 				580E587B24E97EF90040826C /* TrackSearchCellModel.swift in Sources */,
 				580E586D24E8E0800040826C /* MasterViewController.swift in Sources */,
 				58133E5F24E87EF800B1A324 /* RequestPerformer.swift in Sources */,
-				580E586424E8BAA50040826C /* TrackModel.swift in Sources */,
 				580E586F24E9432A0040826C /* TopTrack.swift in Sources */,
 				580E588124EA15A00040826C /* Constants.swift in Sources */,
 				580E587F24E9CEEB0040826C /* TrackDetailsViewController.swift in Sources */,
 				580E588424EA28AA0040826C /* Utility.swift in Sources */,
+				58714AFE24EB3B2300299BC4 /* TopTrackMock.swift in Sources */,
 				58133E6024E87EF800B1A324 /* RequestEndPoint.swift in Sources */,
 				580E586824E8BF640040826C /* Configuration.swift in Sources */,
 				580E586B24E8C8960040826C /* RequestBuilder.swift in Sources */,
 				58133E5E24E87EF800B1A324 /* RequestManager.swift in Sources */,
 				58133E2B24E8353C00B1A324 /* AppDelegate.swift in Sources */,
 				58133E2D24E8353C00B1A324 /* SceneDelegate.swift in Sources */,
-				580E587824E9740A0040826C /* SearchTrackTableViewCell.swift in Sources */,
+				58714AFF24EB3B2800299BC4 /* AttrMock.swift in Sources */,
+				580E587824E9740A0040826C /* TrackSearchCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -87,7 +87,7 @@ extension MasterViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchCell", for: indexPath) as! SearchTrackTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TrackSearchCell", for: indexPath) as! TrackSearchCell
         if let cellModels = trackSearchViewModel?.trackCellModels {
             cell.setTrackInfo(trackCellModel: cellModels[indexPath.section])
         }
@@ -121,7 +121,6 @@ extension MasterViewController: UITableViewDataSource {
 extension MasterViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
         let trackDetailsVC = storyboard.instantiateViewController(withIdentifier: "TrackDetailsVC") as! TrackDetailsViewController
         trackDetailsVC.trackInfo = trackSearchViewModel?.allTopTracks[indexPath.section]
         trackDetailsVC.modalPresentationStyle = .overFullScreen

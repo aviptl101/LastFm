@@ -10,6 +10,7 @@ import Foundation
 
 protocol TrackSearchViewModelDelegate: NSObject {
     func reloadTableView(page: Int?)
+    func showAlert(message: String)
     func showActivityIndicator()
     func hideActivityIndicator()
 }
@@ -43,6 +44,7 @@ final class TrackSearchViewModel {
                 self?.lastSearchedArtist = artist
             case .failure(let error):
                 print(error)
+                self?.delegate?.showAlert(message: error.localizedDescription)
             }
         }
     }

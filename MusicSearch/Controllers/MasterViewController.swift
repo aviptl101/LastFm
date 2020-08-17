@@ -43,11 +43,21 @@ final class MasterViewController: UIViewController, TrackSearchViewModelDelegate
     // MARK: TrackSearchViewModelDelegate Methods
     
     func reloadTableView(page: Int?) {
+        if trackSearchViewModel?.tracksCount == 0 {
+            showAlert(message: "No Data Found")
+        }
+        
         DispatchQueue.main.async {
             self.tableView.reloadData()
             if let page = page {
                 self.pageLabel.text = "Page: \(page)"
             }
+        }
+    }
+    
+    func showAlert(message: String) {
+        DispatchQueue.main.async {
+            Utility.showAlert(title: "Alert", message: message, for: self)
         }
     }
     

@@ -33,6 +33,7 @@
 		58714AF824EB25CC00299BC4 /* TopTrack+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58714AF724EB25CC00299BC4 /* TopTrack+Extensions.swift */; };
 		58714AFE24EB3B2300299BC4 /* TopTrackMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58714AFA24EB304400299BC4 /* TopTrackMock.swift */; };
 		58714AFF24EB3B2800299BC4 /* AttrMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58714AFC24EB30EC00299BC4 /* AttrMock.swift */; };
+		58714B0124EB4FED00299BC4 /* TopTrackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58714B0024EB4FED00299BC4 /* TopTrackTests.swift */; };
 		79AD7DEC2D42040D2F21C4A1 /* Pods_MusicSearch_MusicSearchUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 642EE82629FABE16BF631583 /* Pods_MusicSearch_MusicSearchUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +87,7 @@
 		58714AF724EB25CC00299BC4 /* TopTrack+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TopTrack+Extensions.swift"; sourceTree = "<group>"; };
 		58714AFA24EB304400299BC4 /* TopTrackMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTrackMock.swift; sourceTree = "<group>"; };
 		58714AFC24EB30EC00299BC4 /* AttrMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttrMock.swift; sourceTree = "<group>"; };
+		58714B0024EB4FED00299BC4 /* TopTrackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTrackTests.swift; sourceTree = "<group>"; };
 		62EB5D7C7DCFC129EC75100E /* Pods-MusicSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicSearch.debug.xcconfig"; path = "Target Support Files/Pods-MusicSearch/Pods-MusicSearch.debug.xcconfig"; sourceTree = "<group>"; };
 		642EE82629FABE16BF631583 /* Pods_MusicSearch_MusicSearchUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicSearch_MusicSearchUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CBAD89701C8BD4468F36C24 /* Pods-MusicSearchTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicSearchTests.debug.xcconfig"; path = "Target Support Files/Pods-MusicSearchTests/Pods-MusicSearchTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				58133E4124E8354500B1A324 /* MusicSearchTests.swift */,
+				58714B0024EB4FED00299BC4 /* TopTrackTests.swift */,
 				58133E4324E8354500B1A324 /* Info.plist */,
 			);
 			path = MusicSearchTests;
@@ -546,6 +549,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				58133E4224E8354500B1A324 /* MusicSearchTests.swift in Sources */,
+				58714B0124EB4FED00299BC4 /* TopTrackTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

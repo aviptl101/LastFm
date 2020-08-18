@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct AttrMock: Encodable {
+struct AttrMock: Codable {
     let user: String?
     let page: String
     let perPage: String

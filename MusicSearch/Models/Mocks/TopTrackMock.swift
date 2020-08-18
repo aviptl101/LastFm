@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct TopTracksResponseMock: Encodable {
+struct TopTracksResponseMock: Codable {
     let list: [TopTrackMock]
     let attr: AttrMock
     init(list: [TopTrackMock] = [TopTrackMock](), attr: AttrMock = AttrMock()) {
@@ -17,7 +17,7 @@ struct TopTracksResponseMock: Encodable {
     }
 }
 
-struct TopTrackMock: Encodable {
+struct TopTrackMock: Codable {
     let name: String
     let listeners: String
     let playcount: String
@@ -27,6 +27,10 @@ struct TopTrackMock: Encodable {
     var artist: ArtistMock?
     let image: [ImageMock]
     let rank: String
+    
+    private enum RankKeys: String, CodingKey {
+        case rank
+    }
     
     init(name: String = "tuhi", listeners: String = "234231", playcount: String = "12312", mbid: String? = "mbid", url: URL? = URL(string: "url"), streamable: String = "false", artist: ArtistMock? = ArtistMock(), image: [ImageMock] = [ImageMock](), rank: String = "1") {
         self.name = name
@@ -41,7 +45,7 @@ struct TopTrackMock: Encodable {
     }
 }
 
-struct ImageMock: Encodable {
+struct ImageMock: Codable {
     var url: URL?
     private let text: String
     private let size: String
@@ -53,7 +57,7 @@ struct ImageMock: Encodable {
     }
 }
 
-struct ArtistMock: Encodable {
+struct ArtistMock: Codable {
     let name: String
     var mbid: String?
     var url: URL?

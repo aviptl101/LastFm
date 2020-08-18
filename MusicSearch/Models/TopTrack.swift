@@ -39,11 +39,11 @@ struct TopTrack: Codable {
     let listeners: String
     let playcount: String
     var mbid: String?
-    let url: URL
+    let url: URL?
     let streamable: String
     var artist: Artist?
     let image: [Image]
-    let rank: String
+    let rank: String?
 
     private enum CodingKeys: String, CodingKey {
         case name
@@ -70,12 +70,12 @@ struct TopTrack: Codable {
         if container.allKeys.contains(CodingKeys.mbid) {
             mbid = try container.decode(String.self, forKey: .mbid)
         }
-        url = try container.decode(URL.self, forKey: .url)
+        url = try? container.decode(URL.self, forKey: .url)
         streamable = try container.decode(String.self, forKey: .streamable)
         artist = try container.decode(Artist.self, forKey: .artist)
         image = try container.decode([Image].self, forKey: .image)
-        let rankContainer = try container.nestedContainer(keyedBy: RankKeys.self, forKey: .rank)
-        rank = try rankContainer.decode(String.self, forKey: .rank)
+        let rankContainer = try? container.nestedContainer(keyedBy: RankKeys.self, forKey: .rank)
+        rank = try rankContainer?.decode(String.self, forKey: .rank)
     }
 }
 

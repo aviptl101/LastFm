@@ -15,7 +15,7 @@ final class MasterViewController: UIViewController, TrackSearchViewModelDelegate
     private var trackSearchViewModel: TrackSearchViewModel?
     private let refreshControl = UIRefreshControl()
     private let searchController = UISearchController(searchResultsController: nil)
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -87,7 +87,7 @@ extension MasterViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TrackSearchCell", for: indexPath) as! TrackSearchCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.SearchCellIdentifier, for: indexPath) as! TrackSearchCell
         if let cellModels = trackSearchViewModel?.trackCellModels {
             cell.setTrackInfo(trackCellModel: cellModels[indexPath.section])
         }

@@ -1,5 +1,5 @@
 //
-//  TopTrackTests.swift
+//  TopTrackModelTests.swift
 //  MusicSearchTests
 //
 //  Created by Avinash J Patel on 18/08/20.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import MusicSearch
 
-class TopTrackTests: XCTestCase {
+class TopTrackModelTests: XCTestCase {
     
     private enum Constants {
         static let trackName = "holi holi"

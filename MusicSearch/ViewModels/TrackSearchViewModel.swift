@@ -53,9 +53,12 @@ final class TrackSearchViewModel {
         }
     }
     
-    func loadNextPageTracks() {
+    func loadNextPageTracks(completion: (() -> Void)? = nil) {
         currentPageIndex += 1
-        getTopTracks(artist: lastSearchedArtist, page: currentPageIndex, autocorrect: false)
+        if lastSearchedArtist.isEmpty {
+            lastSearchedArtist = Constants.initialSearch
+        }
+        getTopTracks(artist: lastSearchedArtist, page: currentPageIndex, autocorrect: false, completion: completion)
     }
     
     func reloadPage(completion: (() -> Void)? = nil) {
@@ -66,7 +69,8 @@ final class TrackSearchViewModel {
     }
     
     func searchArtist(_ searchText: String, completion: (() -> Void)? = nil) {
-        getTopTracks(artist: searchText, page: 1, autocorrect: false, completion: completion)
+        let artist = searchText.isEmpty ? (lastSearchedArtist.isEmpty ? Constants.initialSearch : lastSearchedArtist) : searchText
+        getTopTracks(artist: artist, page: 1, autocorrect: false, completion: completion)
     }
     
     private func getTrackCellModels() {

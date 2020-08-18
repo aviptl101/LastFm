@@ -34,7 +34,7 @@ class TopTrackModelTests: XCTestCase {
         super.tearDown()
     }
     
-    func testInit() {
+    func testModelInitialasation() {
         XCTAssertEqual(topTrack.name, Constants.trackName)
         XCTAssertEqual(topTrack.listeners, Constants.listeners)
         XCTAssertEqual(topTrack.playcount, Constants.playcount)

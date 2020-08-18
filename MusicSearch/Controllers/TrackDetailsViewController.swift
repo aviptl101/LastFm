@@ -23,14 +23,22 @@ class TrackDetailsViewController: UIViewController {
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(backgroundTap))
         view.addGestureRecognizer(tapGestureRecognizer)
-        
+        configureViewWithTrackInfor(trackInfo: trackInfo)
+    }
+    
+    func configureViewWithTrackInfor(trackInfo: TopTrack?) {
         titleLabel.text = trackInfo?.name ?? ""
         artistLabel.text = trackInfo?.artist?.name ?? ""
         rankLabel.text = trackInfo?.rank ?? ""
         listenersLabel.text = trackInfo?.listeners ?? ""
         playCountLabel.text = trackInfo?.playcount ?? ""
+        
+        var imageUrl: URL?
+        if let imageCount = trackInfo?.image.count, imageCount >= 3 {
+            imageUrl = trackInfo?.image[2].url
+        }
         DispatchQueue.main.async {
-            self.imageView.sd_setImage(with: self.trackInfo?.image[2].url, placeholderImage: UIImage(systemName: "person.circle"))
+            self.imageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(systemName: "person.circle"))
         }
     }
     

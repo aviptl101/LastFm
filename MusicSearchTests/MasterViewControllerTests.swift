@@ -32,28 +32,23 @@ class MasterViewControllerTests: XCTestCase {
         return sut
     }
     
+    // MARK: ViewController Tests
+
     func testProperties() {
         let sut = createSUT()
         XCTAssertNotNil(dataSource, "dataSource shouldn't be nil")
         XCTAssertTrue(dataSource.delegate === sut)
     }
     
-    func testTableViewHasCells() {
-        let sut = createSUT()
-        let cell = sut.tableView.dequeueReusableCell(withIdentifier: Constants.SearchCellIdentifier)
-
-        XCTAssertNotNil(cell, "TableView should be able to dequeue cell with Constants.SearchCellIdentifier")
-    }
-    
-    func testInitialGetTopTracks() {
+    func testInitialisationOfViewModelGetTopTracks() {
         let expectation = XCTestExpectation(description: "getTracks")
         let sut = createSUT()
 
         sut.dataSource.getSearchData {
             expectation.fulfill()
-            XCTAssertEqual(sut.dataSource.trackSearchViewModel.lastSearchedArtist, Constants.initialSearch)
-            XCTAssertEqual(sut.dataSource.trackSearchViewModel.tracksCount, Constants.itemsPerPage)
-            XCTAssertEqual(sut.dataSource.trackSearchViewModel.tracksCount, sut.dataSource.trackSearchViewModel.allTopTracks.count)
+            XCTAssertEqual(sut.dataSource.trackSearchViewModel.lastSearchedArtist, Constants.initialSearch, "Initially iewModel's last searched artist should be Constants.initialSearch")
+            XCTAssertEqual(sut.dataSource.trackSearchViewModel.tracksCount, Constants.itemsPerPage, "Initially viewModel's tracksCount should be same as fixed items per page")
+            XCTAssertEqual(sut.dataSource.trackSearchViewModel.tracksCount, sut.dataSource.trackSearchViewModel.allTopTracks.count, "viewModel's tracksCount should be same as allTopTracks array's count")
         }
         
         wait(for: [expectation], timeout: 20)
@@ -65,32 +60,38 @@ class MasterViewControllerTests: XCTestCase {
 
         sut.dataSource.getSearchData {
             expectation.fulfill()
-            XCTAssertEqual(sut.dataSource.trackSearchViewModel.tracksCount, sut.dataSource.tracksCount)
+            XCTAssertEqual(sut.dataSource.trackSearchViewModel.tracksCount, sut.dataSource.tracksCount, "DataSource trackCount should be same as viewModel's track count")
         }
         
         wait(for: [expectation], timeout: 20)
     }
     
     func testSearchArtistToGetTracks() {
+        // Arrange
         let expectation = XCTestExpectation(description: "searchArtistTracks")
         let artist = "taylor"
         let sut = createSUT()
         
+        // Act
         sut.dataSource.searchArtist(artist) {
             expectation.fulfill()
+            // Assert
             XCTAssertEqual(sut.dataSource.trackSearchViewModel.lastSearchedArtist, artist)
         }
         
         wait(for: [expectation], timeout: 20)
     }
     
-    func testEmptySearchToGetTracks() {
+    func testNonEmptyLastSearchedArtist() {
+        // Arrange
         let expectation = XCTestExpectation(description: "emptySearchArtistTracks")
         let artist = ""
         let sut = createSUT()
         
+        // Act
         sut.dataSource.searchArtist(artist) {
             expectation.fulfill()
+            // Assert
             XCTAssertNotEqual(sut.dataSource.trackSearchViewModel.lastSearchedArtist, artist, "If empty Search string then it shouldn't search and lastSearchedArtist should not change to empty string")
         }
         
@@ -98,14 +99,45 @@ class MasterViewControllerTests: XCTestCase {
     }
     
     func testLoadNextPageTracks() {
+        // Arrange
         let expectation = XCTestExpectation(description: "loadNextPageTracks")
         let sut = createSUT()
         let viewModel = sut.dataSource.trackSearchViewModel
         let pageIndex = viewModel.currentPageIndex
         
+        // Act
         viewModel.loadNextPageTracks {
             expectation.fulfill()
+            // Assert
             XCTAssertEqual(viewModel.currentPageIndex, pageIndex + 1, "ViewModel's currentPageIndex should be equal to previous pageIndex + 1")
+        }
+        
+        wait(for: [expectation], timeout: 20)
+    }
+    
+    // MARK: TableCell Tests
+    
+    func testTableViewHasCells() {
+        let sut = createSUT()
+        let cell = sut.tableView.dequeueReusableCell(withIdentifier: Constants.SearchCellIdentifier) as! TrackSearchCell
+
+        XCTAssertNotNil(cell, "TableView should be able to dequeue cell with Constants.SearchCellIdentifier")
+    }
+    
+    func testTableViewCellArtistLabel() {
+        // Arrange
+        let expectation = XCTestExpectation(description: "getTracks")
+        let sut = createSUT()
+        let cell = sut.tableView.dequeueReusableCell(withIdentifier: Constants.SearchCellIdentifier) as! TrackSearchCell
+        
+        // Act
+        XCTAssertNotNil(cell, "TableView should be able to dequeue cell with Constants.SearchCellIdentifier")
+        sut.dataSource.getSearchData {
+            expectation.fulfill()
+            let cellModel = sut.dataSource.trackSearchViewModel.trackCellModels[0]
+            cell.setTrackInfo(trackCellModel: cellModel)
+            // Assert
+            XCTAssertEqual(cell.artistLabel.text, sut.dataSource.trackSearchViewModel.lastSearchedArtist)
         }
         
         wait(for: [expectation], timeout: 20)

@@ -31,7 +31,7 @@ final class TrackSearchViewModel {
         getTopTracks(artist: artist, page: 1, autocorrect: autocorrect)
     }
     
-    func getTopTracks(artist: String, page: Int, autocorrect: Bool) {
+    func getTopTracks(artist: String, page: Int, autocorrect: Bool,completion: (() -> Void)? = nil) {
         if artist.isEmpty { return }
         delegate?.showActivityIndicator()
         RequestManager.getTopTracks(endPoint: .getTopTracks(artist: artist, page: page, autocorrect: autocorrect)) { [weak self] (result) in
@@ -49,6 +49,7 @@ final class TrackSearchViewModel {
                     self?.delegate?.showAlert(message: error.errorMessage)
                 }
             }
+            completion?()
         }
     }
     
@@ -57,15 +58,15 @@ final class TrackSearchViewModel {
         getTopTracks(artist: lastSearchedArtist, page: currentPageIndex, autocorrect: false)
     }
     
-    func reloadPage() {
+    func reloadPage(completion: (() -> Void)? = nil) {
         if lastSearchedArtist.isEmpty {
             lastSearchedArtist = Constants.initialSearch
         }
-        getTopTracks(artist: lastSearchedArtist, page: currentPageIndex, autocorrect: false)
+        getTopTracks(artist: lastSearchedArtist, page: currentPageIndex, autocorrect: false, completion: completion)
     }
     
-    func searchArtist(_ searchText: String) {
-        getTopTracks(artist: searchText, page: 1, autocorrect: false)
+    func searchArtist(_ searchText: String, completion: (() -> Void)? = nil) {
+        getTopTracks(artist: searchText, page: 1, autocorrect: false, completion: completion)
     }
     
     private func getTrackCellModels() {

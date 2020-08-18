@@ -37,7 +37,7 @@ class MusicSearchTests: XCTestCase {
     
     func testSearchViewModelTracksCount() {
         guard let viewModel = trackSearchViewModel else {
-            XCTFail("trackSearchViewModel can't be nil")
+            XCTFail("trackSearchViewModel shouldn't be nil")
             return
         }
         
@@ -46,7 +46,7 @@ class MusicSearchTests: XCTestCase {
     
     func testTrackSearchViewModelLoadNextPage() {
         guard let viewModel = trackSearchViewModel else {
-            XCTFail("trackSearchViewModel can't be nil")
+            XCTFail("trackSearchViewModel shouldn't be nil")
             return
         }
         
@@ -61,7 +61,7 @@ class MusicSearchTests: XCTestCase {
     
     func testSearchViewModelArtist() {
         guard let viewModel = trackSearchViewModel else {
-            XCTFail("trackSearchViewModel can't be nil")
+            XCTFail("trackSearchViewModel shouldn't be nil")
             return
         }
         

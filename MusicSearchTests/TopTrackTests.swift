@@ -23,6 +23,7 @@ class TopTrackTests: XCTestCase {
     var artist: ArtistMock!
     
     override func setUpWithError() throws {
+        super.setUp()
         artist = ArtistMock(name: Constants.artistName)
         topTrack = TopTrack.createTopTrack(name: Constants.trackName, listeners: Constants.listeners, playcount: Constants.playcount, streamable: Constants.streamable, artist: artist)
     }
@@ -30,6 +31,7 @@ class TopTrackTests: XCTestCase {
     override func tearDownWithError() throws {
         artist = nil
         topTrack = nil
+        super.tearDown()
     }
     
     func testInit() {

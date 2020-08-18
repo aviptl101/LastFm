@@ -12,13 +12,15 @@ final class MasterViewController: UIViewController, TrackSearchViewModelDelegate
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var pageLabel: UILabel!
-    private var trackSearchViewModel: TrackSearchViewModel?
     private let refreshControl = UIRefreshControl()
     private let searchController = UISearchController(searchResultsController: nil)
-    
+    var dataSource: TracksDataSource!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        dataSource = TracksDataSource(tableView: tableView, delegate: self)
+        dataSource.trackSearchViewModel.delegate = self
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Artist"
@@ -32,19 +34,16 @@ final class MasterViewController: UIViewController, TrackSearchViewModelDelegate
         tableView.refreshControl = refreshControl
         tableView.refreshControl?.isHidden = true
         refreshControl.isHidden = true
-        
-        trackSearchViewModel = TrackSearchViewModel(artist: Constants.initialSearch, autocorrect: false)
-        trackSearchViewModel?.delegate = self
     }
     
     @objc private func getSearchData() {
-        trackSearchViewModel?.reloadPage()
+        dataSource.getSearchData()
     }
     
     // MARK: TrackSearchViewModelDelegate Methods
     
     func reloadTableView(page: Int?) {
-        if trackSearchViewModel?.tracksCount == 0 {
+        if dataSource.tracksCount == 0 {
             showAlert(message: "No Data Found")
         }
         
@@ -76,65 +75,21 @@ final class MasterViewController: UIViewController, TrackSearchViewModelDelegate
     }
 }
 
-extension MasterViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return trackSearchViewModel?.tracksCount ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView,
-                   numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.SearchCellIdentifier, for: indexPath) as! TrackSearchCell
-        if let cellModels = trackSearchViewModel?.trackCellModels {
-            cell.setTrackInfo(trackCellModel: cellModels[indexPath.section])
-        }
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let count = trackSearchViewModel?.tracksCount, count > 40 else { return }
-        
-        if indexPath.section == count - 1 {
-            trackSearchViewModel?.loadNextPageTracks()
-        }
-        
-        //Updating Page Count to Page Label
-        let pageIndex = (indexPath.section / Constants.itemsPerPage) + 1
-        self.pageLabel.text = "Page: \(pageIndex)"
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        headerView.sizeToFit()
-        headerView.backgroundColor = .systemGroupedBackground
-        return headerView
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 20
-    }
-}
-
-extension MasterViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let trackDetailsVC = storyboard.instantiateViewController(withIdentifier: "TrackDetailsVC") as! TrackDetailsViewController
-        trackDetailsVC.trackInfo = trackSearchViewModel?.allTopTracks[indexPath.section]
-        trackDetailsVC.modalPresentationStyle = .overFullScreen
-        self.present(trackDetailsVC, animated: false)
-        
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-}
-
 extension MasterViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
         
         guard let searchText = searchBar.text else { return }
-        trackSearchViewModel?.searchArtist(searchText)
+        dataSource.searchArtist(searchText)
+    }
+}
+
+extension MasterViewController: TracksDataSourceDelegate {
+    func presentTrackDetailsVC(trackDetailsVC: UIViewController) {
+        present(trackDetailsVC, animated: false)
+    }
+    
+    func updatePageLabel(with index: Int) {
+        pageLabel.text = "Page: \(index)"
     }
 }

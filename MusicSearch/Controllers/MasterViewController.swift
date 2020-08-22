@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class MasterViewController: UIViewController, TrackSearchViewModelDelegate {
+final class MasterViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var pageLabel: UILabel!
@@ -20,14 +20,13 @@ final class MasterViewController: UIViewController, TrackSearchViewModelDelegate
         super.viewDidLoad()
         
         dataSource = TracksDataSource(tableView: tableView, delegate: self)
-        dataSource.trackSearchViewModel.delegate = self
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Artist"
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
-        refreshControl.addTarget(self, action: #selector(getSearchData), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(reloadSearchData), for: .valueChanged)
         refreshControl.backgroundColor = .clear
         refreshControl.frame = tableView.frame
         refreshControl.center = tableView.center
@@ -36,22 +35,38 @@ final class MasterViewController: UIViewController, TrackSearchViewModelDelegate
         refreshControl.isHidden = true
     }
     
-    @objc private func getSearchData() {
-        dataSource.getSearchData()
+    @objc private func reloadSearchData() {
+        dataSource.reloadPageData()
     }
     
     // MARK: TrackSearchViewModelDelegate Methods
+}
+
+extension MasterViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        
+        guard let searchText = searchBar.text else { return }
+        dataSource.searchArtist(searchText)
+    }
+}
+
+extension MasterViewController: TracksDataSourceDelegate {
+    func presentTrackDetailsVC(trackDetailsVC: UIViewController) {
+        present(trackDetailsVC, animated: false)
+    }
     
-    func reloadTableView(page: Int?) {
+    func updatePageLabel(with index: Int) {
+        pageLabel.text = "Page: \(index)"
+    }
+    
+    func reloadView(page: Int?) {
         if dataSource.tracksCount == 0 {
             showAlert(message: "No Data Found")
         }
         
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-            if let page = page {
-                self.pageLabel.text = "Page: \(page)"
-            }
+        if let page = page {
+            updatePageLabel(with: page)
         }
     }
     
@@ -72,24 +87,5 @@ final class MasterViewController: UIViewController, TrackSearchViewModelDelegate
         DispatchQueue.main.async {
             self.activityIndicator.stopAnimating()
         }
-    }
-}
-
-extension MasterViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        let searchBar = searchController.searchBar
-        
-        guard let searchText = searchBar.text else { return }
-        dataSource.searchArtist(searchText)
-    }
-}
-
-extension MasterViewController: TracksDataSourceDelegate {
-    func presentTrackDetailsVC(trackDetailsVC: UIViewController) {
-        present(trackDetailsVC, animated: false)
-    }
-    
-    func updatePageLabel(with index: Int) {
-        pageLabel.text = "Page: \(index)"
     }
 }

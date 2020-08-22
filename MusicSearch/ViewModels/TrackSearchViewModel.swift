@@ -8,87 +8,57 @@
 
 import Foundation
 
-protocol TrackSearchViewModelDelegate: NSObject {
-    func reloadTableView(page: Int?)
-    func showAlert(message: String)
-    func showActivityIndicator()
-    func hideActivityIndicator()
-}
+typealias SearchResult = Result<[TrackSearchCellModel]?, SessionTaskError>
 
 final class TrackSearchViewModel {
-    weak var delegate: TrackSearchViewModelDelegate?
-    var newSearchTopTracks: [TopTrack]?
     var allTopTracks = [TopTrack]()
-    var trackCellModels = [TrackSearchCellModel]()
-    var tracksCount: Int {
-        return trackCellModels.count
-    }
     var currentPageIndex = 1
     var lastSearchedArtist = ""
     
-    init(artist: String, autocorrect: Bool) {
+    init() {
         Configuration.shared.configure(apiKey: Constants.apiKey)
-        getTopTracks(artist: artist, page: 1, autocorrect: autocorrect)
     }
     
-    func getTopTracks(artist: String, page: Int, autocorrect: Bool,completion: (() -> Void)? = nil) {
+    func getTopTracks(artist: String, page: Int, autocorrect: Bool, completion: @escaping (SearchResult) -> Void) {
         if artist.isEmpty { return }
-        delegate?.showActivityIndicator()
         RequestManager.getTopTracks(endPoint: .getTopTracks(artist: artist, page: page, autocorrect: autocorrect)) { [weak self] (result) in
-            self?.delegate?.hideActivityIndicator()
             switch result {
             case .success(let value):
-                //print(value)
-                self?.newSearchTopTracks = value.list
-                self?.getTrackCellModels()
                 self?.currentPageIndex = page
                 self?.lastSearchedArtist = artist
+                let cellModels = self?.getTrackCellModels(topTracks: value.list)
+                completion(.success(cellModels))
             case .failure(let error):
                 print(error)
-                if error != SessionTaskError.responseError {
-                    self?.delegate?.showAlert(message: error.errorMessage)
-                }
+                completion(.failure(error))
             }
-            completion?()
         }
     }
     
-    func loadNextPageTracks(completion: (() -> Void)? = nil) {
-        currentPageIndex += 1
+    func reloadPage(completion: ((SearchResult) -> Void)? = nil) {
         if lastSearchedArtist.isEmpty {
             lastSearchedArtist = Constants.initialSearch
         }
-        getTopTracks(artist: lastSearchedArtist, page: currentPageIndex, autocorrect: false, completion: completion)
-    }
-    
-    func reloadPage(completion: (() -> Void)? = nil) {
-        if lastSearchedArtist.isEmpty {
-            lastSearchedArtist = Constants.initialSearch
+        getTopTracks(artist: lastSearchedArtist, page: currentPageIndex, autocorrect: false) { (result) in
+            completion?(result)
         }
-        getTopTracks(artist: lastSearchedArtist, page: currentPageIndex, autocorrect: false, completion: completion)
     }
     
-    func searchArtist(_ searchText: String, completion: (() -> Void)? = nil) {
-        let artist = searchText.isEmpty ? (lastSearchedArtist.isEmpty ? Constants.initialSearch : lastSearchedArtist) : searchText
-        getTopTracks(artist: artist, page: 1, autocorrect: false, completion: completion)
-    }
-    
-    private func getTrackCellModels() {
-        guard let tracks = newSearchTopTracks else { return }
+    private func getTrackCellModels(topTracks: [TopTrack]?) -> [TrackSearchCellModel]? {
+        guard let tracks = topTracks else { return nil }
         
         if currentPageIndex == 1 {
-            // Removing all Models if its New Search
-            trackCellModels.removeAll()
             allTopTracks = tracks
         } else {
             // Otherwise appending next page tracks
             allTopTracks.append(contentsOf: tracks)
         }
         
-        for track in tracks {
+        var cellModels = [TrackSearchCellModel]()
+        for track in allTopTracks {
             let trackCellModel = TrackSearchCellModel(trackImage: track.image[0].url, trackTitle: track.name, artistTitle: track.artist?.name)
-            self.trackCellModels.append(trackCellModel)
+            cellModels.append(trackCellModel)
         }
-        self.delegate?.reloadTableView(page: currentPageIndex)
+        return cellModels
     }
 }

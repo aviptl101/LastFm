@@ -11,32 +11,86 @@ import UIKit
 protocol TracksDataSourceDelegate: AnyObject {
     func presentTrackDetailsVC(trackDetailsVC: UIViewController)
     func updatePageLabel(with index: Int)
+    func reloadView(page: Int?)
+    func showAlert(message: String)
+    func showActivityIndicator()
+    func hideActivityIndicator()
 }
 
 class TracksDataSource: NSObject {
     weak var delegate: TracksDataSourceDelegate?
     var tableView: UITableView
-    var trackSearchViewModel: TrackSearchViewModel
+    var trackSearchViewModel = TrackSearchViewModel()
+    var trackCellModels = [TrackSearchCellModel]()
     var tracksCount: Int {
-        return trackSearchViewModel.tracksCount
+        return trackCellModels.count
     }
     
     init(tableView: UITableView, delegate: TracksDataSourceDelegate? = nil) {
         self.tableView = tableView
         self.delegate = delegate
-        self.trackSearchViewModel = TrackSearchViewModel(artist: Constants.initialSearch, autocorrect: false)
         super.init()
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.getTopTracks(artist: Constants.initialSearch)
     }
     
-    func getSearchData(completion: (() -> Void)? = nil) {
-        trackSearchViewModel.reloadPage(completion: completion)
+    func getTopTracks(artist: String) {
+        delegate?.showActivityIndicator()
+        trackSearchViewModel.getTopTracks(artist: artist, page: 1, autocorrect: false) {
+            [weak self] result in
+            self?.delegate?.hideActivityIndicator()
+            switch result {
+            case .success(let value):
+                if let cellModels = value {
+                    self?.trackCellModels = cellModels
+                }
+            case .failure(let error):
+                print(error)
+                if error != SessionTaskError.responseError {
+                    self?.delegate?.showAlert(message: error.errorMessage)
+                }
+            }
+            self?.reloadTableView()
+        }
     }
     
-    func searchArtist(_ searchText: String, completion: (() -> Void)? = nil) {
-        trackSearchViewModel.searchArtist(searchText, completion: completion)
+    func reloadPageData() {
+        delegate?.showActivityIndicator()
+        trackSearchViewModel.reloadPage() {
+            [weak self] result in
+            self?.delegate?.hideActivityIndicator()
+            switch result {
+            case .success(let value):
+                if let cellModels = value {
+                    self?.trackCellModels = cellModels
+                    self?.reloadTableView()
+                }
+            case .failure(let error):
+                print(error)
+                if error != SessionTaskError.responseError {
+                    self?.delegate?.showAlert(message: error.errorMessage)
+                }
+            }
+        }
+    }
+    
+    func searchArtist(_ searchText: String) {
+        let artist = searchText.isEmpty ? (trackSearchViewModel.lastSearchedArtist.isEmpty ? Constants.initialSearch : trackSearchViewModel.lastSearchedArtist) : searchText
+        self.getTopTracks(artist: artist)
+    }
+    
+    func loadNextPageTracks() {
+        trackSearchViewModel.currentPageIndex += 1
+        reloadPageData()
+    }
+    
+    func reloadTableView() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            self.delegate?.reloadView(page: self.trackSearchViewModel.currentPageIndex)
+        }
     }
 }
 
@@ -52,7 +106,7 @@ extension TracksDataSource: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.SearchCellIdentifier, for: indexPath) as! TrackSearchCell
-        cell.setTrackInfo(trackCellModel: trackSearchViewModel.trackCellModels[indexPath.section])
+        cell.setTrackInfo(trackCellModel: trackCellModels[indexPath.section])
         return cell
     }
     
@@ -60,7 +114,7 @@ extension TracksDataSource: UITableViewDataSource {
         guard tracksCount > 40 else { return }
         
         if indexPath.section == tracksCount - 1 {
-            trackSearchViewModel.loadNextPageTracks()
+            loadNextPageTracks()
         }
         
         //Updating Page Count to Page Label
